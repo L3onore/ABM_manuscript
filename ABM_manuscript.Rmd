@@ -1,0 +1,134 @@
+---
+title             : "Combining ABM with rTMS"
+shorttitle        : "Combining ABM with rTMS"
+
+author: 
+  - name          : "Leonore Bovy"
+    affiliation   : "1,2"
+    corresponding : yes    # Define only one corresponding author
+    address       : "Kapittelweg 29,  6525 EN Nijmegen, The Netherlands. P.O. Box 9101 6500 HB Nijmegen The Netherlands"
+    email         : "l.bovy@donders.ru.nl"
+
+affiliation:
+  - id            : "1"
+    institution   : "Donders Institute"
+  - id            : "2"
+    institution   : "Radboudumc"
+
+abstract: |
+  Enter abstract here. Each new line herein must be indented, like this line.
+  
+keywords          : "attentional bias modification, repetitive transcranial magnetic stimulation, depression, mood, dysphoria"
+wordcount         : "X"
+
+bibliography      : ["r-references.bib", "library.bib"]
+
+figsintext        : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+lineno            : yes
+
+lang              : "english"
+class             : "man"
+output            : papaja::apa6_word
+---
+
+
+```{r install_package, include = FALSE}
+#make sure to comment out when running the code a second time
+#devtools::install_github("crsh/papaja")
+#devtools::install_github("doomlab/MOTE")
+#install.packages("citr")
+```
+
+```{r load_packages, include = FALSE}
+suppressWarnings(suppressMessages(library(Matrix)))
+suppressWarnings(suppressMessages(library(pbkrtest)))
+suppressWarnings(suppressMessages(library(lme4)))
+suppressWarnings(suppressMessages(library(parallel)))
+suppressWarnings(suppressMessages(library(afex)))
+suppressWarnings(suppressMessages(library(boot)))
+suppressWarnings(suppressMessages(library(effects)))
+suppressWarnings(suppressMessages(library(car)))
+suppressWarnings(suppressMessages(library(lattice)))
+suppressWarnings(suppressMessages(library(psych)))
+suppressWarnings(suppressMessages(library(pastecs)))
+suppressWarnings(suppressMessages(library(ggplot2)))
+suppressWarnings(suppressMessages(library(Hmisc)))
+suppressWarnings(suppressMessages(library(haven)))
+suppressWarnings(suppressMessages(library(nlme)))
+suppressWarnings(suppressMessages(library(devtools)))
+suppressWarnings(suppressMessages(library(tidyr)))
+suppressWarnings(suppressMessages(library(ez)))
+suppressWarnings(suppressMessages(library(lsr)))
+suppressWarnings(suppressMessages(library(lmerTest)))
+suppressWarnings(suppressMessages(library(papaja)))
+suppressWarnings(suppressMessages(library(MOTE)))
+suppressWarnings(suppressMessages(library(citr)))
+```
+
+# Introduction
+
+The lifetime prevalence of major depressive disorder (MDD) is the highest among all mental disorders, with a rate of 18.7% in the Dutch population [@DeGraaf2012]. A range of different treatment options are available, with pharmacotherapy and cognitive behavioral therapy being the most frequently applied forms of treatment [@Nemeroff2003]. Unfortunately, a considerable amount of patients does not benefit from these treatments or suffer from recurrent episodes after a completed therapy [@Alison2009; @Souery2006]. Ultimately, after several recurrent depressive episodes, patients can be offered electroconvulsive therapy (ECT), a form of treatment that is accompanied by severe side effects such as anterograde and retrograde memory impairments (for a review see @Ingram2008). Less invasive forms of therapy are urgently required for otherwise treatment-resistant patients [@Alison2009]. 
+
+### TMS  
+
+One promising alternative treatment option could be repetitive transcranial magnetic stimulation (rTMS) therapy, which has repeatedly been shown to reduce depressive symptoms (for a review, see @McClintock2017). TMS is a non-invasive technique used to stimulate local regions of the cortex. The magnetic field that is produced by the coil, induces a secondary electric current in the stimulated brain areas. Dependent on the direction and frequency by which a magnetic pulse is emitted, neuronal stimulation can selectively activate or inhibit the cortex [@Siebner2003]. Repetitive TMS (rTMS), in comparison to single pulse stimulation, involves a train of magnetic pulses at a specific frequency, eliciting longer-lasting effects than the stimulation itself, if applied over an extended period of time [@Hallett2007].
+
+Repetitive TMS seems to be a promising tool in the treatment of depression, not only because it has shown to reduce depressive symptoms in otherwise treatment resistant patients but also due to its relatively few and mild side effects and low costs [@Kozel2002]. 
+
+
+As a result, rTMS has already been approved as a treatment for MDD in Israel, Canada and the United States (Schutter, 2010). 
+
+Currently, studies are conducted that aim at supporting the therapeutic value in the Dutch stepped care model of depression. However, it needs to be mentioned that even though high frequency TMS has shown to be effective, the antidepressant effects seems to be moderate (Schutter, 2009) and the remission rate has been reported to be rather low (Lam, Chan, Wilkins-Ho, & Yatham, 2008), both pointing to the need to improve this approach. In line with these studies, it is of particular interest to investigate the possibility of amplifying the beneficial effects of rTMS by combining it with other psychological interventions. 
+
+
+
+ABM
+
+One technique that might be very promising in complementing the rTMS treatment might be found in the so-called cognitive bias modification (CBM) training, a computerized training method designed to affect cognitive biases. Cognitive biases reflect selective and non-veridical processing of distinct negative information as for instance sad or angry faces in an attention bias (e.g., Baert, de Raedt, Schacht, & Koster, 2010) or ambiguous sentences in an interpretation bias (Hindash & Amir, 2012). In line with cognitive models of depression (e.g., Beck, 1976; Beck & Clark, 1997) cognitive biases have been shown to be prominent in a range of different mental disorders and are supposed to play a causal role in the development and maintenance of them (for a review see, Hallion & Ruscio, 2011). 
+
+Recently, a computerized training method has been developed to affect these biases, also referred to as cognitive bias modification (CBM). The original form of this training has been developed to affect attention allocation towards anxiety related stimuli (MacLeod, Mathews, & Tata, 1986). In this dot-probe task, two word stimuli were presented simultaneously on the computer screen (one anxiety related/ one neutral), immediately followed by a probe that appeared behind one of these two words. The participants’ task was to react as fast as possible to the probe. This task allows the assessment of an attentional bias, which is characterized by shorter response latencies on trials, where the probe appears behind the anxiety related word compared to the other trials. For training purposes, this dot-probe task was adjusted into the attention bias modification (ABM) training, by changing the contingencies: The probe always appeared behind the neutral word in order to selectively train participants attention towards the neutral and away from the anxiety related stimulus. 
+This form of attention bias modification (ABM) training has been proven effective in modifying attentional bias and in reducing emotional vulnerability in response to stressful situation (for review see Beard, Sawyer, & Hofmann, 2012). Even more important, after several training sessions ABM has also been shown to directly reduce depressive symptomatology in a sample of mild to moderately depressed participants (Wells & Beevers, 2010). 
+Recently, Klumpp and Amir (2010) argued that the above-described ABM might work via enhancing attentional control. Interestingly, a study by Browning and colleagues (2010) gave support for this assumption by analyzing neuronal changes as result of a dot-probe task. Their results indicate a training effect in form of increased neural activity in the dorsolateral prefrontal cortex (DLPFC). Activity in these areas was greatest when participants’ attention was directed at stimuli (e.g., neutral pictures) that were opposite to the trained stimulus condition (e.g., negative picture). In other words, after inducing an attentional bias towards one kind of stimuli, the DLPFC had to exert cognitive control in order to promote the visual processing of the other kind of stimuli. Recently, de Raedt and colleagues (2010) found that a reduction in attentional bias towards negatively valenced faces could also be achieved by increasing the neural activity of the left DLPFC by means of repetitive TMS. This study thereby replicates the findings from Vanderhasselt et al. (2009), demonstrating an increase in attentional control after a single session of high frequency rTMS on the left DLPFC. 
+In sum, these studies give reason to believe that ABM and rTMS show comparable effects, as they, on the one hand, affect the neuronal activity of the DLPFC and, on the other hand, influence attentional processing. ABM might thus be a promising tool that is capable of maximizing the effects of rTMS and thereby amplifies beneficial therapeutic effects in the treatment of depression. Furthermore, as high frequency stimulation of the left DLPFC over a prolonged period of time increases the excitability of this brain region (Fitzgerald et al., 2006; Schutter, 2009), the subsequent ABM treatment might make use of this enhanced cerebral activity, resulting not merely in the accumulation, but in synergy of the effects.
+The aim of this project is to test whether adding ABM to rTMS treatment might amplify the effects of rTMS in reducing attentional bias and emotional vulnerability in a single session intervention. According to a recent review by Browning, Holmes and Harmer (2010), highlighting the central role of attentional biases in emotional disorders, combining different treatment forms should be of particular interest for future studies aimed at improving the treatment of anxiety and mood disorders. To our knowledge, this would be the first study investigating the combined effects of a cognitive intervention with a brain stimulation technique to alter attentional biases and emotional vulnerability. However, before testing patients suffering from major depressive disorder, it is advisable to investigate possible effects in a single session approach applied to a non-clinical population. Thereby, the best approximation of a depressive sample can be achieved by investigating the effects in an analogue depressed sample, thus, in individuals showing a heightened BDI score (Cox, Enns, Larsen, 2000). However, instead of focussing on participants that fall into the range of moderate to severe depression (BDI-II; Beck, Steer, & Brown, 1996) as recommended by Cox and colleagues, a milder cutoff score will be applied in this study. In return, prior to the single session intervention a sad mood will be induced, in order to activate latent depressogenic cognitive schemas (Ramel, Goldin, Eyler, Brown, Gotlib, & McQuaid, 2007) and thereby imitating an analogue depression. At the end of the intervention, positive mood will be restored by means of a positive mood induction. In this way, the burden of the participants will be minimized.
+
+ 
+
+
+
+
+
+# Methods
+
+
+
+
+
+
+## Participants
+
+## Material
+
+## Procedure
+
+## Data analysis
+We used `r cite_r("r-references.bib")` for all our analyses.
+
+
+# Results
+
+# Discussion
+
+
+\newpage
+
+# References
+```{r create_r-references}
+r_refs(file = "r-references.bib")
+```
+
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
